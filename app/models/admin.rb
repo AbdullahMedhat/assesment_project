@@ -4,4 +4,5 @@ class Admin < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+  include DeviseInvitable::Inviter
 end
