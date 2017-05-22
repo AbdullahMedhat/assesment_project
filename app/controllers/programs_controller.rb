@@ -1,14 +1,14 @@
 # class Program
 
 class ProgramsController < ApplicationController
-  before_action :authenticate_admin!
+  # before_action :authenticate_admin!
   def index
     @programs = Program.all
     render json:  @programs
   end
 
   def show
-    @progam = Program.find(params[:id])
+    @program = Program.find(params[:id])
     render json:  @program
   end
 
