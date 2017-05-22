@@ -1,5 +1,7 @@
 # class Program
+
 class ProgramsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @programs = Program.all
     render json:  @programs
