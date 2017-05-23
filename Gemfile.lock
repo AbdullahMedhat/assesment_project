@@ -105,6 +105,7 @@ GEM
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
     orm_adapter (0.5.0)
+    pg (0.20.0)
     public_suffix (2.0.5)
     rack (2.0.3)
     rack-cors (0.4.1)
@@ -199,6 +200,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.0.5)
   omniauth
+  pg
   rack-cors
   rails (~> 5.0.2)
   sass-rails (~> 5.0)
