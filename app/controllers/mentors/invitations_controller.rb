@@ -1,10 +1,10 @@
-class InvitationsController < Devise::InvitationsController
+      class Mentors::InvitationsController < Devise::InvitationsController
     include InvitableMethods
-    before_action :authenticate_admin!, only: :create
-    before_action :resource_from_invitation_token, only: [:edit, :update]
+    # before_action :authenticate_admin!, only: :create
+    # before_action :resource_from_invitation_token, only: [:edit, :update]
 
     def create
-      Mentor.invite!(invite_params, current_admin)
+      Mentor.invite!(invite_params, current_mentor)
       render json: { success: ['Mentor created.'] }, status: :created
     end
 
@@ -29,7 +29,7 @@ class InvitationsController < Devise::InvitationsController
     end
 
     def authenticate_inviter!
-      use authenticate_admin! in before_action
+      # use authenticate_admin! in before_action
     end
 
     def authenticate_mentor!
@@ -51,11 +51,10 @@ class InvitationsController < Devise::InvitationsController
     private
 
     def invite_params
-      params.permit(mentor: [:email, :invitation_token, :provider, :skip_invitation])
+      params.require(:mentor).permit(mentor: [:email, :invitation_token, :provider, :skip_invitation])
     end
 
     def accept_invitation_params
       params.permit(:password, :password_confirmation, :invitation_token)
     end
   end
-end
