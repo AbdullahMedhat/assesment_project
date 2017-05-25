@@ -1,6 +1,6 @@
 class DeviseInvitableAddToStudents < ActiveRecord::Migration
   def up
-  create_table :students do |t|
+    change_table :students do |t|
       t.string     :invitation_token
       t.datetime   :invitation_created_at
       t.datetime   :invitation_sent_at
@@ -14,7 +14,6 @@ class DeviseInvitableAddToStudents < ActiveRecord::Migration
     end
   end
 
-  # add_index :students, :invitation_token, :unique => true
   def down
     change_table :students do |t|
       t.remove_references :invited_by, polymorphic: true
