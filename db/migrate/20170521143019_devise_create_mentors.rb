@@ -42,7 +42,7 @@ class DeviseCreateMentors < ActiveRecord::Migration[5.0]
 
       t.timestamps null: false
     end
-    add_index :users, :invitation_token, :unique => true
+    add_index :mentors, :invitation_token, :unique => true
     add_index :mentors, :email,                unique: true
     add_index :mentors, :reset_password_token, unique: true
     # add_index :mentors, :confirmation_token,   unique: true
