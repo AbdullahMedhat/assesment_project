@@ -51,7 +51,7 @@
     private
 
     def invite_params
-      params.require(:mentor).permit(mentor: [:email, :invitation_token, :provider, :skip_invitation])
+      params.require(:mentor).permit(:email, :invitation_token, :provider, :skip_invitation)
     end
 
     def accept_invitation_params
