@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.4.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~>5.0.2'
 # Use sqlite3 as the database for Active Record
@@ -11,6 +11,8 @@ end
 group :production do
   gem 'pg'
 end
+gem 'devise' , '~>4.2.0'
+gem 'devise_invitable', '~> 1.7.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -58,4 +60,3 @@ gem 'devise', '~> 4.2.0'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'devise_token_auth', '~> 0.1.40'
 gem 'omniauth'
-
