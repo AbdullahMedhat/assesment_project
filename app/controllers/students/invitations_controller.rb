@@ -1,11 +1,11 @@
-  class Mentors::InvitationsController < Devise::InvitationsController
+  class Students::InvitationsController < Devise::InvitationsController
     include InvitableMethods
     # before_action :authenticate_user!, only: :create
     # before_action :resource_from_invitation_token, only: [:edit, :update]
 
     def create
-      Mentor.invite!(invite_params, current_mentor)
-      render json: { success: ['Mentor created.'] }, status: :created
+      Student.invite!(invite_params, current_student)
+      render json: { success: ['Student created.'] }, status: :created
     end
 
     def edit
@@ -13,26 +13,26 @@
     end
 
     def update
-      mentor = Mentor.accept_invitation!(accept_invitation_params)
-      if @mentor.errors.empty?
-        render json: { success: ['Mentor updated.'] }, status: :accepted
+      student = Student.accept_invitation!(accept_invitation_params)
+      if @student.errors.empty?
+        render json: { success: ['Student updated.'] }, status: :accepted
       else
-        render json: { errors: mentor.errors.full_messages },
+        render json: { errors: student.errors.full_messages },
                status: :unprocessable_entity
       end
     end
 
     def resource_from_invitation_token
-      @mentor = Mentor.find_by_invitation_token(params[:invitation_token], true)
-      return if params[:invitation_token] && @mentor
+      @student = Student.find_by_invitation_token(params[:invitation_token], true)
+      return if params[:invitation_token] && @student
       render json: { errors: ['Invalid token.'] }, status: :not_acceptable
     end
 
     def authenticate_inviter!
-      # use authenticate_admin! in before_action
+      # use authenticate_user! in before_action
     end
 
-    def authenticate_mentor!
+    def authenticate_student!
       return if current_user
       render json: {
         errors: ['Authorized users only.']
@@ -48,10 +48,11 @@
       mapping.to
     end
 
+
     private
 
     def invite_params
-      params.require(:mentor).permit(:email, :invitation_token, :provider, :skip_invitation)
+      params.require(:student).permit(:email, :invitation_token, :provider, :skip_invitation)
     end
 
     def accept_invitation_params
