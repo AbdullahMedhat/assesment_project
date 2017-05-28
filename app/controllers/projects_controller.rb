@@ -6,15 +6,13 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    render json:  @project
-  end
-
-  def new
-    @project = Project.new
+    render json: @project
   end
 
   def create
-    @project = Project.new(project_params)
+    @program = Program.find(params[:program_id])
+    @project = @program.projects.create(project_params)
+    # @project = Project.new(project_params)
     if @project.save
       redirect_to @project
     else
@@ -42,6 +40,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :group, :mentor, :github_url, :status)
+    params.require(:project).permit(:name, :description, :group, :mentor, :github_url, :status, :program_id)
   end
 end

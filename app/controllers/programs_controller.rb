@@ -4,12 +4,18 @@ class ProgramsController < ApplicationController
   # before_action :authenticate_admin!
   def index
     @programs = Program.all
-    render json:  @programs
+
+    render json: @programs.to_json({
+      include: :projects
+      })
   end
+
 
   def show
     @program = Program.find(params[:id])
-    render json:  @program
+    render json: @program.to_json({
+      include: :projects
+      })
   end
 
   def new

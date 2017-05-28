@@ -5,6 +5,7 @@ class CreateProjects < ActiveRecord::Migration[5.0]
       t.string :github_url
       t.string :group
       t.string :mentor
+      t.belongs_to :program, foreign_key: true
       t.boolean :done , default: false
       t.timestamps
     end

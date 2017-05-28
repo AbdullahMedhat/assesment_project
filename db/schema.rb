@@ -92,9 +92,11 @@ ActiveRecord::Schema.define(version: 20170527093442) do
     t.string   "github_url"
     t.string   "group"
     t.string   "mentor"
+    t.integer  "program_id"
     t.boolean  "done",       default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["program_id"], name: "index_projects_on_program_id"
   end
 
   create_table "students", force: :cascade do |t|
