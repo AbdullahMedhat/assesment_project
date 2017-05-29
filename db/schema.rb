@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525171000) do
+ActiveRecord::Schema.define(version: 20170529091732) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -122,6 +122,19 @@ ActiveRecord::Schema.define(version: 20170525171000) do
     t.index ["invited_by_id"], name: "index_students_on_invited_by_id"
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_students_on_uid_and_provider", unique: true
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.string   "git_url"
+    t.string   "info"
+    t.integer  "student_id"
+    t.integer  "mentor_id"
+    t.string   "feedback"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "grade"
+    t.index ["mentor_id"], name: "index_submissions_on_mentor_id"
+    t.index ["student_id"], name: "index_submissions_on_student_id"
   end
 
 end

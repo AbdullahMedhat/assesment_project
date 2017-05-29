@@ -5,5 +5,5 @@ class Mentor < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable 
-
+  has_many :submissions
 end

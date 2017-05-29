@@ -5,4 +5,5 @@ class Student < ApplicationRecord
           :validatable
 
   include DeviseTokenAuth::Concerns::User
+  has_many :submissions
 end
