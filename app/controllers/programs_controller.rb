@@ -51,6 +51,6 @@ class ProgramsController < ApplicationController
 
   private
   def program_params
-    params.require(:program).permit(:name, :startdate, :enddate, :description)
+    params.require(:program).permit(:name, :startdate, :enddate, :description, :projects)
   end
 end

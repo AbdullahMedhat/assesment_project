@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @program = Program.find(params[:program_id])
+    @program = Program.find(params[:project][:program_id])
     @project = @program.projects.create(project_params)
     # @project = Project.new(project_params)
     if @project.save
@@ -40,6 +40,6 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :description, :group, :mentor, :github_url, :status, :program_id)
+    params.require(:project).permit(:name, :description, :mentor, :github_url, :status, :program_id)
   end
 end
