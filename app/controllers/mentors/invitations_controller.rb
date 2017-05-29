@@ -4,7 +4,7 @@
     # before_action :resource_from_invitation_token, only: [:edit, :update]
 
     def create
-      Mentor.invite!(invite_params, current_mentor)
+      Mentor.invite!({email: params[:email]}, current_admin)
       render json: { success: ['Mentor created.'] }, status: :created
     end
 
@@ -50,9 +50,9 @@
 
     private
 
-    def invite_params
-      params.require(:mentor).permit(:email, :invitation_token, :provider, :skip_invitation)
-    end
+    # def invite_params
+    #   params.require(:mentor).permit(:email, :invitation_token, :provider, :skip_invitation)
+    # end
 
     def accept_invitation_params
       params.permit(:password, :password_confirmation, :invitation_token)

@@ -1,5 +1,4 @@
-# class Program
-
+# Class Program
 class ProgramsController < ApplicationController
   # before_action :authenticate_admin!
   def index

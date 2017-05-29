@@ -4,8 +4,8 @@ class InvitationsController < Devise::InvitationsController
   before_action :resource_from_invitation_token, only: [:edit, :update]
 
   def create
-    Mentor.invite!(invite_params, current_mentor)
-    render json: { success: ['mentor created.'] }, status: :created
+    Mentor.invite!(params[:email], current_mentor)
+    render json: { success: true }, status: :created
   end
 
   def edit
@@ -24,9 +24,9 @@ class InvitationsController < Devise::InvitationsController
 
   private
 
-  def invite_params
-    params.permit(mentor: [:email, :invitation_token, :provider, :skip_invitation])
-  end
+  # def invite_params
+  #   params.permit(mentor: [:email, :invitation_token, :provider, :skip_invitation])
+  # end
 
   def accept_invitation_params
     params.permit(:password, :password_confirmation, :invitation_token)
