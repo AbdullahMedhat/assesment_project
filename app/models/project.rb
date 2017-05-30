@@ -1,7 +1,5 @@
 class Project < ApplicationRecord
   belongs_to :program
-  has_many :mentors
-  has_many :students
-  has_many :groups
-
+  has_many :mentors, through: :program
+  has_many :students, through: :program
 end
