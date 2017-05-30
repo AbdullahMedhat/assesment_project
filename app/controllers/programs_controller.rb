@@ -5,17 +5,13 @@ class ProgramsController < ApplicationController
   def index
     @programs = Program.all
 
-    render json: @programs.to_json({
-      include: :projects
-      })
+    render json: @programs.to_json
   end
 
 
   def show
     @program = Program.find(params[:id])
-    render json: @program.to_json({
-      include: :projects
-      })
+    render json: @program.to_json(:include => [:projects, :mentors, :students])
   end
 
   def new
@@ -51,6 +47,6 @@ class ProgramsController < ApplicationController
 
   private
   def program_params
-    params.require(:program).permit(:name, :startdate, :enddate, :description, :projects)
+    params.require(:program).permit(:name, :startdate, :enddate, :description, :projects, :mentors, :students)
   end
 end

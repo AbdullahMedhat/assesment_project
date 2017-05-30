@@ -1,6 +1,7 @@
 class DeviseTokenAuthCreateMentors < ActiveRecord::Migration[5.0]
   def change
     create_table(:mentors) do |t|
+      t.belongs_to :program, foreign_key: true
       ## Required
       t.string :provider, :null => false, :default => "email"
       t.string :uid, :null => false, :default => ""

@@ -52,7 +52,7 @@
     private
 
     def invite_params
-      params.require(:student).permit(:email, :invitation_token, :provider, :skip_invitation)
+      params.require(:student).permit(:name, :email, :invitation_token, :provider, :skip_invitation , :program_id)
     end
 
     def accept_invitation_params

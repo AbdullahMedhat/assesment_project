@@ -1,6 +1,7 @@
 class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[5.0]
   def change
     create_table(:students) do |t|
+      t.belongs_to :program, foreign_key: true
       ## Required
       t.string :provider, :null => false, :default => "email"
       t.string :uid, :null => false, :default => ""
@@ -41,7 +42,7 @@ class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[5.0]
 
       ## Tokens
       t.text :tokens
-      
+
       t.timestamps
     end
 
