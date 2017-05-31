@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     render json: @project
   end
 
@@ -18,6 +19,8 @@ class ProjectsController < ApplicationController
     if @project.save
         render json: @project
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -32,6 +35,9 @@ class ProjectsController < ApplicationController
         redirect_to @project
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -61,7 +67,11 @@ class ProjectsController < ApplicationController
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     params.require(:project).permit(:name, :description, :mentor, :github_url, :status, :program_id)
+=======
+    params.require(:project).permit(:name, :description, :mentors, :github_url, :status, :program_id, :submissions, :students)
+>>>>>>> Stashed changes
 =======
     params.require(:project).permit(:name, :description, :mentors, :github_url, :status, :program_id, :submissions, :students)
 >>>>>>> Stashed changes
