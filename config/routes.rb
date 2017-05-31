@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :programs
   resources :groups
   resources :projects
+  resources :mentors
+  resources :students
   mount_devise_token_auth_for 'Admin', at: 'auth'
 
     mount_devise_token_auth_for 'Student', at: 'student_auth', skip: [:invitations]

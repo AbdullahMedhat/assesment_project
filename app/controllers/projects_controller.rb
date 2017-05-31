@@ -10,18 +10,13 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @program = Program.find(params[:project][:program_id])
+    @program = Program.find(params[:program_id])
     @project = @program.projects.create(project_params)
-    # @project = Project.new(project_params)
     if @project.save
-      redirect_to @project
+        render json: @project
     else
       @project.errors.details
     end
-  end
-
-  def edit
-    @project = Project.find(params[:id])
   end
 
   def update

@@ -9,6 +9,16 @@ class StudentsController < ApplicationController
       render json: @student
     end
 
+    def create
+      @program = Program.find(params[:program_id])
+      @student = @program.students.create(student_params)
+      if @student.save
+          render json: @student
+      else
+        @student.errors.details
+      end
+    end
+
     def edit
       @student = Student.find(params[:id])
     end
@@ -33,4 +43,3 @@ class StudentsController < ApplicationController
       params.require(:student).permit(:name, :email, :program_id)
     end
   end
-end
