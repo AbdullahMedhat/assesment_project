@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     render json: @project
   end
 
@@ -19,6 +20,8 @@ class ProjectsController < ApplicationController
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     render json: @project.to_json(:include => [:submissions, :students])
   end
 
@@ -28,6 +31,9 @@ class ProjectsController < ApplicationController
     if @project.save
         redirect_to @project
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -54,7 +60,11 @@ class ProjectsController < ApplicationController
   def project_params
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     params.require(:project).permit(:name, :description, :mentor, :github_url, :status, :program_id)
+=======
+    params.require(:project).permit(:name, :description, :mentors, :github_url, :status, :program_id, :submissions, :students)
+>>>>>>> Stashed changes
 =======
     params.require(:project).permit(:name, :description, :mentors, :github_url, :status, :program_id, :submissions, :students)
 >>>>>>> Stashed changes
