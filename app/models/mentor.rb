@@ -7,6 +7,11 @@ class Mentor < ApplicationRecord
           :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
   # Include default devise modules. Others available are:
+<<<<<<< HEAD
   # :confirmable, :lockable, :timeoutable
 
+=======
+  # :confirmable, :lockable, :timeoutable 
+  has_many :submissions
+>>>>>>> feature_create_submissions_model
 end

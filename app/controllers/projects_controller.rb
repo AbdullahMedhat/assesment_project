@@ -6,6 +6,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     render json: @project
   end
 
@@ -14,6 +16,21 @@ class ProjectsController < ApplicationController
     @project = @program.projects.create(project_params)
     if @project.save
         render json: @project
+=======
+=======
+>>>>>>> Stashed changes
+    render json: @project.to_json(:include => [:submissions, :students])
+  end
+
+  def create
+   @program = Program.find(params[:project][:program_id])
+    @project = @program.projects.create(project_params)
+    if @project.save
+        redirect_to @project
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     else
       @project.errors.details
     end
@@ -35,6 +52,14 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     params.require(:project).permit(:name, :description, :mentor, :github_url, :status, :program_id)
+=======
+    params.require(:project).permit(:name, :description, :mentors, :github_url, :status, :program_id, :submissions, :students)
+>>>>>>> Stashed changes
+=======
+    params.require(:project).permit(:name, :description, :mentors, :github_url, :status, :program_id, :submissions, :students)
+>>>>>>> Stashed changes
   end
 end
