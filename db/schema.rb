@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531021412) do
+ActiveRecord::Schema.define(version: 20170531114956) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20170531021412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "grade"
+    t.integer  "project_id"
     t.index ["mentor_id"], name: "index_submissions_on_mentor_id"
     t.index ["student_id"], name: "index_submissions_on_student_id"
   end

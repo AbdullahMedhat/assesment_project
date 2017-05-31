@@ -11,4 +11,5 @@ class Student < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User
   has_many :submissions
+  belongs_to :program
 end

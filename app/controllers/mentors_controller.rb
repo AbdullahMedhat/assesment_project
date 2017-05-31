@@ -31,6 +31,6 @@ class MentorsController < ApplicationController
   private
 
   def mentor_params
-    params.require(:mentor).permit(:name, :email, :program_id)
+    params.require(:mentor).permit(:name, :bio, :submissions, :program_id, :email )
   end
 end
