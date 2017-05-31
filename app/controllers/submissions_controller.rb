@@ -2,7 +2,11 @@ class SubmissionsController < ApplicationController
   # before_filter: authenticate_student
 
   def index
-    @submissions = Submission.all
+    if params[:project_id]
+      @submissions = Submission.where(project_id: params[:project_id])
+    else
+      @submissions = Submission.all
+    end
     render json: @submissions.to_json({include: {student: {only: [:name, :id]}}, methods: :status})
   end
 
@@ -11,9 +15,9 @@ class SubmissionsController < ApplicationController
     @submission.grade = 1
     # @submission.student = current_student
     if @submission.save
-      redirect_to @submission
+      render json: @submissions
     else
-      @submission.errors.details
+      render json: @submission.errors.details
     end
   end
 
@@ -22,19 +26,14 @@ class SubmissionsController < ApplicationController
     render json:  @submission
   end
 
-
-  def update
-    @submission = Submission.find(params[:id])
-    if @submission.update_attributes(submission_params)
-      render json: @submission
-    else
-      render json: @submission.errors.details
-    end
+  def claim
+    @submission = submission.find(params[:id])
+    # @submission.mentor_id = current_mentor
   end
 
   private
 
   def submission_params
-    params.require(:submission).permit(:git_url, :info, :feedback, :grade, :student_id, :mentor_id, :project_id)
+    params.require(:submission).permit(:git_url, :info, :feedback, :grade, :student_id, :project_id)
   end
 end

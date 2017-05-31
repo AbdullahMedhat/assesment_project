@@ -6,17 +6,7 @@ class StudentsController < ApplicationController
 
     def show
       @student = Student.find(params[:id])
-      render json: @student.to_json(:include => :submissions)
-    end
-
-    def create
-      @program = Program.find(params[:program_id])
-      @student = @program.students.create(student_params)
-      if @student.save
-          render json: @student
-      else
-        @student.errors.details
-      end
+      render json: @student.to_json(:include => [:submissions, :program])
     end
 
     def edit
@@ -40,10 +30,6 @@ class StudentsController < ApplicationController
     private
 
     def student_params
-<<<<<<< Updated upstream
-      params.require(:student).permit(:name, :email, :program_id)
-=======
-      params.require(:student).permit(:name, :email, :bio, :submissions, :program_id)
->>>>>>> Stashed changes
+      params.require(:student).permit(:name, :email, :bio, :submissions, :program_id )
     end
   end
