@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531114956) do
+ActiveRecord::Schema.define(version: 20170529085134) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170531114956) do
     t.string   "nickname"
     t.string   "image"
     t.string   "email"
+    t.text     "bio"
     t.text     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -66,7 +67,6 @@ ActiveRecord::Schema.define(version: 20170531114956) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
-    t.text     "bio"
     t.index ["confirmation_token"], name: "index_mentors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_mentors_on_email", unique: true
     t.index ["invitation_token"], name: "index_mentors_on_invitation_token", unique: true
@@ -84,16 +84,15 @@ ActiveRecord::Schema.define(version: 20170531114956) do
     t.date     "enddate"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "user_id"
   end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
+    t.string   "github_url"
     t.integer  "program_id"
-    t.boolean  "done",        default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.text     "description"
+    t.boolean  "done",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["program_id"], name: "index_projects_on_program_id"
   end
 
@@ -118,6 +117,7 @@ ActiveRecord::Schema.define(version: 20170531114956) do
     t.string   "nickname"
     t.string   "image"
     t.string   "email"
+    t.text     "bio"
     t.text     "tokens"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(version: 20170531114956) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
-    t.text     "bio"
     t.index ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["invitation_token"], name: "index_students_on_invitation_token", unique: true
@@ -145,12 +144,13 @@ ActiveRecord::Schema.define(version: 20170531114956) do
     t.string   "info"
     t.integer  "student_id"
     t.integer  "mentor_id"
+    t.integer  "project_id"
     t.string   "feedback"
+    t.integer  "grade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "grade"
-    t.integer  "project_id"
     t.index ["mentor_id"], name: "index_submissions_on_mentor_id"
+    t.index ["project_id"], name: "index_submissions_on_project_id"
     t.index ["student_id"], name: "index_submissions_on_student_id"
   end
 

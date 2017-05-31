@@ -39,6 +39,7 @@ class DeviseTokenAuthCreateMentors < ActiveRecord::Migration[5.0]
       t.string :nickname
       t.string :image
       t.string :email
+      t.text :bio
 
       ## Tokens
       t.text :tokens
