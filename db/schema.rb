@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529091732) do
+ActiveRecord::Schema.define(version: 20170531021412) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170529091732) do
   end
 
   create_table "mentors", force: :cascade do |t|
+    t.integer  "program_id"
     t.string   "provider",               default: "email", null: false
     t.string   "uid",                    default: "",      null: false
     t.string   "encrypted_password",     default: "",      null: false
@@ -65,11 +66,13 @@ ActiveRecord::Schema.define(version: 20170529091732) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
+    t.text     "bio"
     t.index ["confirmation_token"], name: "index_mentors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_mentors_on_email", unique: true
     t.index ["invitation_token"], name: "index_mentors_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_mentors_on_invitations_count"
     t.index ["invited_by_id"], name: "index_mentors_on_invited_by_id"
+    t.index ["program_id"], name: "index_mentors_on_program_id"
     t.index ["reset_password_token"], name: "index_mentors_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_mentors_on_uid_and_provider", unique: true
   end
@@ -84,7 +87,18 @@ ActiveRecord::Schema.define(version: 20170529091732) do
     t.integer  "user_id"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "program_id"
+    t.boolean  "done",        default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.text     "description"
+    t.index ["program_id"], name: "index_projects_on_program_id"
+  end
+
   create_table "students", force: :cascade do |t|
+    t.integer  "program_id"
     t.string   "provider",               default: "email", null: false
     t.string   "uid",                    default: "",      null: false
     t.string   "encrypted_password",     default: "",      null: false
@@ -115,11 +129,13 @@ ActiveRecord::Schema.define(version: 20170529091732) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
+    t.text     "bio"
     t.index ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["invitation_token"], name: "index_students_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_students_on_invitations_count"
     t.index ["invited_by_id"], name: "index_students_on_invited_by_id"
+    t.index ["program_id"], name: "index_students_on_program_id"
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_students_on_uid_and_provider", unique: true
   end
