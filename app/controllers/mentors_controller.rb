@@ -15,11 +15,12 @@ class MentorsController < ApplicationController
   end
 
   def update
-    @mentor = Mentor.find(params[:id])
-    if @mentor.update mentor_params
-      redirect_to @mentor
+    @mentor = Mentor.accept_invitation!(accept_invitation_params)
+    if @mentor
+      redirect_to 'http://localhost:3001/'
     else
-      @mentor.errors.details
+      render json: { errors: 'Invitation is invalid!' },
+             status: :unprocessable_entity
     end
   end
 
@@ -31,6 +32,12 @@ class MentorsController < ApplicationController
   private
 
   def mentor_params
-    params.require(:mentor).permit(:name, :bio, :submissions, :program_id, :email )
+    params.require(:mentor).permit(:name, :bio, :submissions, :program_id,
+    :email, :password, :password_confirmation, :invitation_token)
+  end
+
+  def accept_invitation_params
+    params.require(:mentor).permit(:password, :password_confirmation,
+    :invitation_token)
   end
 end

@@ -1,34 +1,25 @@
 class InvitationsController < Devise::InvitationsController
-  include InvitableMethods
-  before_action :authenticate_admin!, only: :create
-  before_action :resource_from_invitation_token, only: [:edit, :update]
+  before_filter :update_sanitized_params, only: :update
 
-  def create
-    Mentor.invite!(params[:email], current_mentor)
-    render json: { success: true }, status: :created
-  end
-
-  def edit
-    redirect_to "#{client_url}?invitation_token=#{params[:invitation_token]}"
-  end
-
+  # PUT /resource/invitation
   def update
-    mentor = Mentor.accept_invitation!(accept_invitation_params)
-    if @mentor.errors.empty?
-      render json: { success: ['mentor updated.'] }, status: :accepted
-    else
-      render json: { errors: mentor.errors.full_messages },
-             status: :unprocessable_entity
+    respond_to do |format|
+      format.js do
+        invitation_token = Devise.token_generator.digest(resource_class, :invitation_token, update_resource_params[:invitation_token])
+        self.resource = resource_class.where(invitation_token: invitation_token).first
+        resource.skip_password = true
+        resource.update_attributes update_resource_params.except(:invitation_token)
+      end
+      format.html do
+        super
+      end
     end
   end
 
-  private
 
-  # def invite_params
-  #   params.permit(mentor: [:email, :invitation_token, :provider, :skip_invitation])
-  # end
+  protected
 
-  def accept_invitation_params
-    params.permit(:password, :password_confirmation, :invitation_token)
+  def update_sanitized_params
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:name, :password, :password_confirmation, :invitation_token, :avatar, :avatar_cache])
   end
 end
