@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531174157) do
+ActiveRecord::Schema.define(version: 20170601194516) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20170531174157) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
+    t.string   "gitHub_userName"
     t.index ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["invitation_token"], name: "index_students_on_invitation_token", unique: true
@@ -150,6 +151,7 @@ ActiveRecord::Schema.define(version: 20170531174157) do
     t.integer  "grade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "repoName"
     t.index ["mentor_id"], name: "index_submissions_on_mentor_id"
     t.index ["project_id"], name: "index_submissions_on_project_id"
     t.index ["student_id"], name: "index_submissions_on_student_id"

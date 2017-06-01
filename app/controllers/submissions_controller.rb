@@ -12,7 +12,6 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
-    @submission.grade = 1
     # @submission.student = current_student
     if @submission.save
       render json: @submissions
@@ -34,6 +33,6 @@ class SubmissionsController < ApplicationController
   private
 
   def submission_params
-    params.require(:submission).permit(:git_url, :info, :feedback, :grade, :student_id, :project_id)
+    params.require(:submission).permit(:git_url, :info, :feedback, :grade, :student_id, :project_id, :repoName)
   end
 end
