@@ -14,8 +14,9 @@ class StudentsController < ApplicationController
     end
 
     def update
-      byebug
-      @student = Student.accept_invitation!(accept_invitation_params)
+      @student = Student.find_by(invitation_token: accept_invitation_params['invitation_token'])
+      @student.update accept_invitation_params
+      @student.accept_invitation!
       if @student
         redirect_to 'http://localhost:3001/'
       else

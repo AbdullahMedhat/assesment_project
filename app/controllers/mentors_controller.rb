@@ -15,7 +15,9 @@ class MentorsController < ApplicationController
   end
 
   def update
-    @mentor = Mentor.accept_invitation!(accept_invitation_params)
+    @mentor = Mentor.find_by(invitation_token: accept_invitation_params['invitation_token'])
+    @mentor.update accept_invitation_params
+    @mentor.accept_invitation!
     if @mentor
       redirect_to 'http://localhost:3001/'
     else
