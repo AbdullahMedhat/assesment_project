@@ -13,11 +13,11 @@
     end
 
     def update
-      mentor = Mentor.accept_invitation!(accept_invitation_params)
+      @mentor = Mentor.accept_invitation!(accept_invitation_params)
       if @mentor.errors.empty?
         render json: { success: ['Mentor updated.'] }, status: :accepted
       else
-        render json: { errors: mentor.errors.full_messages },
+        render json: { errors: @mentor.errors.full_messages },
                status: :unprocessable_entity
       end
     end
