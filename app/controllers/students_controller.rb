@@ -14,11 +14,13 @@ class StudentsController < ApplicationController
     end
 
     def update
-      @student = Student.find(params[:id])
-      if @student.update student_params
-        redirect_to @student
+      byebug
+      @student = Student.accept_invitation!(accept_invitation_params)
+      if @student
+        redirect_to 'http://localhost:3001/'
       else
-        @student.errors.details
+        render json: { errors: 'Invitation is invalid!' },
+               status: :unprocessable_entity
       end
     end
 
@@ -30,6 +32,12 @@ class StudentsController < ApplicationController
     private
 
     def student_params
-      params.require(:student).permit(:name, :gitHub_userName, :email, :bio, :submissions, :program_id )
+      params.require(:student).permit(:name, :gitHub_userName, :email, :bio, :submissions, :program_id,
+      :password, :password_confirmation, :invitation_token)
+    end
+
+    def accept_invitation_params
+      params.require(:student).permit(:password, :password_confirmation,
+      :invitation_token)
     end
   end

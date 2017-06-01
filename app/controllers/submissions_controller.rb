@@ -12,7 +12,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
-    # @submission.student = current_student
+    # @submission.student_id = current_student
     if @submission.save
       render json: @submissions
     else
