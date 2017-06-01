@@ -1,5 +1,3 @@
-# class Program
-
 class ProgramsController < ApplicationController
   # before_action :authenticate_admin!
   def index
@@ -47,6 +45,8 @@ class ProgramsController < ApplicationController
 
   private
   def program_params
-    params.require(:program).permit(:name, :startdate, :enddate, :description, :projects, :mentors, :students)
+
+    params.require(:program).permit(:name, :startdate, :enddate, :description, :projects, :mentors, :students , :program_id)
+
   end
 end
