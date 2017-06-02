@@ -20,19 +20,23 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def update
+    @submission = Submission.find(params[:id])
+    if @submission.update submission_params
+      redirect_to @submission
+    else
+      @submission.errors.details
+    end
+  end
+
   def show
     @submission = Submission.find(params[:id])
     render json:  @submission
   end
 
-  def claim
-    @submission = submission.find(params[:id])
-    # @submission.mentor_id = current_mentor
-  end
-
   private
 
   def submission_params
-    params.require(:submission).permit(:git_url, :info, :feedback, :grade, :student_id, :project_id, :repoName)
+    params.require(:submission).permit(:git_url, :info, :feedback, :grade, :project_id, :repoName, :mentor_id, :student_id)
   end
 end

@@ -39,6 +39,6 @@ class StudentsController < ApplicationController
 
     def accept_invitation_params
       params.require(:student).permit(:password, :password_confirmation,
-      :invitation_token)
+      :invitation_token, :gitHub_userName, :name, :email, :bio)
     end
   end

@@ -44,9 +44,8 @@ class ProgramsController < ApplicationController
   end
 
   private
+  
   def program_params
-
     params.require(:program).permit(:name, :startdate, :enddate, :description, :projects, :mentors, :students , :program_id)
-
   end
 end
