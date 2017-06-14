@@ -1,14 +1,15 @@
-# Class Program
 class ProgramsController < ApplicationController
   # before_action :authenticate_admin!
   def index
     @programs = Program.all
-    render json:  @programs
+
+    render json: @programs.to_json
   end
+
 
   def show
     @program = Program.find(params[:id])
-    render json:  @program
+    render json: @program.to_json(:include => [:projects, :mentors, :students])
   end
 
   def new
@@ -43,7 +44,8 @@ class ProgramsController < ApplicationController
   end
 
   private
+  
   def program_params
-    params.require(:program).permit(:name, :startdate, :enddate, :description)
+    params.require(:program).permit(:name, :startdate, :enddate, :description, :projects, :mentors, :students , :program_id)
   end
 end

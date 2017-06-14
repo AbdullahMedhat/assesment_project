@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:invite, keys: [:program_id])
     devise_parameter_sanitizer.permit(:accept_invitation, keys: [:name])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:session])
   end
   # def authenticate_custom
   #   authenticate_mentor! unless admin_signed_in?

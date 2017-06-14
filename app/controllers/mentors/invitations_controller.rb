@@ -4,22 +4,25 @@
     # before_action :resource_from_invitation_token, only: [:edit, :update]
 
     def create
-      Mentor.invite!({email: params[:email]}, current_admin)
+      # byebug
+      Mentor.invite!(invite_params, current_admin)
       render json: { success: ['Mentor created.'] }, status: :created
     end
 
     def edit
-      redirect_to "#{client_api_url}?invitation_token=#{params[:invitation_token]}"
+      # byebug
+      # redirect_to "#{client_api_url}?invitation_token=#{params[:invitation_token]}"
     end
 
     def update
-      mentor = Mentor.accept_invitation!(accept_invitation_params)
-      if @mentor.errors.empty?
-        render json: { success: ['Mentor updated.'] }, status: :accepted
-      else
-        render json: { errors: mentor.errors.full_messages },
-               status: :unprocessable_entity
-      end
+      byebug
+      # @mentor = Mentor.accept_invitation!(accept_invitation_params)
+      # if @mentor.errors.empty?
+      #   render json: { success: ['Mentor updated.'] }, status: :accepted
+      # else
+      #   render json: { errors: @mentor.errors.full_messages },
+      #          status: :unprocessable_entity
+      # end
     end
 
     def resource_from_invitation_token
@@ -50,11 +53,11 @@
 
     private
 
-    # def invite_params
-    #   params.require(:mentor).permit(:email, :invitation_token, :provider, :skip_invitation)
-    # end
+    def invite_params
+      params.require(:mentor).permit(:name, :email, :invitation_token, :provider, :skip_invitation, :program_id)
+    end
 
     def accept_invitation_params
-      params.permit(:password, :password_confirmation, :invitation_token)
+      params.require(:mentor).permit(:password, :password_confirmation, :invitation_token)
     end
   end
